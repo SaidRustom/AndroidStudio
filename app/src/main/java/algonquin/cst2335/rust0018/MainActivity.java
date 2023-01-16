@@ -12,8 +12,10 @@ public class MainActivity extends AppCompatActivity {
 
         // loads buttons, text on screen
         setContentView(R.layout.activity_main);
-            //R means res
-            //layout is the folder
-            //activity_main is the file
+            /*
+            R means res
+            layout is the folder
+            activity_main is the file
+            */
     }
 }

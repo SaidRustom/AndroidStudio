@@ -35,6 +35,41 @@ public class SecondActivity extends AppCompatActivity {
         binding.textView.setText("Welcome back " + emailAddress);
 
 
+        ActivityResultLauncher<Intent> cameraResult = registerForActivityResult(
+                new ActivityResultContracts.StartActivityForResult(),
+                new ActivityResultCallback<ActivityResult>() {
+                    @Override
+
+                    public void onActivityResult(ActivityResult result) {
+
+                        if (result.getResultCode() == Activity.RESULT_OK) {
+
+                            Intent data = result.getData();
+                            Bitmap thumbnail = data.getParcelableExtra("data");
+                            FileOutputStream fOut = null;
+                            File sandbox = getFilesDir();
+                            binding.imageView.setImageBitmap(thumbnail);
+                            try { fOut = openFileOutput("Picture.png", Context.MODE_PRIVATE);
+
+                                thumbnail.compress(Bitmap.CompressFormat.PNG, 100, fOut);
+
+                                fOut.flush();
+
+                                fOut.close();
+
+                            }
+
+                            catch (FileNotFoundException e)
+
+                            { e.printStackTrace();
+
+                            } catch (IOException e) {
+                                e.printStackTrace();
+                            }
+                        }
+                    }
+                }
+        );
 
         binding.CallNumber.setOnClickListener(btn -> {
             Intent call = new Intent(Intent.ACTION_DIAL);
@@ -43,41 +78,8 @@ public class SecondActivity extends AppCompatActivity {
         binding.ChangePicture.setOnClickListener( click -> {
 
             Intent cameraIntent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
-            startActivity(cameraIntent);
-            ActivityResultLauncher<Intent> cameraResult = registerForActivityResult(
-                    new ActivityResultContracts.StartActivityForResult(),
-                    new ActivityResultCallback<ActivityResult>() {
-                        @Override
+           // startActivity(cameraIntent);
 
-                        public void onActivityResult(ActivityResult result) {
-
-                            if (result.getResultCode() == Activity.RESULT_OK) {
-
-                                Intent data = result.getData();
-                                Bitmap thumbnail = data.getParcelableExtra("data");
-                                FileOutputStream fOut = null;
-                                File sandbox = getFilesDir();
-                                try { fOut = openFileOutput("Picture.png", Context.MODE_PRIVATE);
-
-                                    thumbnail.compress(Bitmap.CompressFormat.PNG, 100, fOut);
-
-                                    fOut.flush();
-
-                                    fOut.close();
-
-                                }
-
-                                catch (FileNotFoundException e)
-
-                                { e.printStackTrace();
-
-                                } catch (IOException e) {
-                                    e.printStackTrace();
-                                }
-                            }
-                        }
-                    }
-);
                  cameraResult.launch(cameraIntent);
              });
 

@@ -41,6 +41,7 @@ public class MainActivity extends AppCompatActivity {
     protected void onResume() {
         super.onResume();
         Log.w( TAG, "In onResume() - Touch screen now responsive" );
+
     }
 
     @Override

@@ -10,6 +10,7 @@ import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.net.Uri;
 import android.os.Bundle;
 import android.provider.MediaStore;
@@ -70,6 +71,14 @@ public class SecondActivity extends AppCompatActivity {
                     }
                 }
         );
+
+        File file = new File(getFilesDir(), "Picture.png");
+
+        if(file.exists()){
+            Bitmap img = BitmapFactory.decodeFile(String.valueOf(file));
+            binding.imageView.setImageBitmap(img);
+        }
+
 
         binding.CallNumber.setOnClickListener(btn -> {
             Intent call = new Intent(Intent.ACTION_DIAL);

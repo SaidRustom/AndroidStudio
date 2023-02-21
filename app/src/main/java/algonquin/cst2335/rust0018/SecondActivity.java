@@ -9,6 +9,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.net.Uri;
@@ -36,6 +37,7 @@ public class SecondActivity extends AppCompatActivity {
         binding.textView.setText("Welcome back " + emailAddress);
 
 
+        SharedPreferences prefs = getSharedPreferences("MyData",Context.MODE_PRIVATE);
         ActivityResultLauncher<Intent> cameraResult = registerForActivityResult(
                 new ActivityResultContracts.StartActivityForResult(),
                 new ActivityResultCallback<ActivityResult>() {
@@ -82,6 +84,7 @@ public class SecondActivity extends AppCompatActivity {
 
         binding.CallNumber.setOnClickListener(btn -> {
             Intent call = new Intent(Intent.ACTION_DIAL);
+            String phoneNumber = prefs.getString("PhoneNumber","");
             startActivity(call.setData(Uri.parse("tel:"+binding.editTextPhone.getText().toString())));
         });
         binding.ChangePicture.setOnClickListener( click -> {

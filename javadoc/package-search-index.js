@@ -1,0 +1,1 @@
+packageSearchIndex = [{"l":"algonquin.cst2335.rust0018"},{"l":"All Packages","url":"allpackages-index.html"}]

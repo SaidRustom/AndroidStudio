@@ -1,0 +1,1 @@
+typeSearchIndex = [{"l":"All Classes","url":"allclasses-index.html"},{"p":"algonquin.cst2335.rust0018","l":"BuildConfig"},{"p":"algonquin.cst2335.rust0018","l":"MainActivity"}]
